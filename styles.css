@@ -1,0 +1,410 @@
+/* ============================================================
+   RUMAH CANTIK CENDEKIA SPA — Design Tokens
+   Color:   cream #FBF6FA, plum #3B2547, lavender #9C6FA9,
+            lavender-deep #7A4F87, lilac-soft #F1E6F6, gold #C9A366
+   Type:    Fraunces (display), Beau Rivage (script accent), Jost (body/UI)
+   ============================================================ */
+
+:root {
+  --cream: #FBF6FA;
+  --plum: #3B2547;
+  --plum-soft: #6B5478;
+  --lavender: #9C6FA9;
+  --lavender-deep: #7A4F87;
+  --lilac-soft: #F1E6F6;
+  --lilac-mid: #E4CFEE;
+  --gold: #C9A366;
+  --white: #FFFFFF;
+
+  --font-display: "Fraunces", serif;
+  --font-script: "Beau Rivage", cursive;
+  --font-body: "Jost", -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--plum);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font-family: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============ TYPOGRAPHY ============ */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--lavender-deep);
+}
+
+.script-text {
+  font-family: var(--font-script);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--lavender-deep);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--plum);
+  letter-spacing: 0.5px;
+}
+
+/* ============ BUTTONS & BADGES ============ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--lavender), var(--lavender-deep));
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(122, 79, 135, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(122, 79, 135, 0.42);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--lilac-mid);
+  color: var(--lavender-deep);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  padding: 64px 0 40px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-emblem {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  color: var(--gold);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--plum-soft);
+  margin-bottom: 6px;
+}
+
+.hero-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 9vw, 64px);
+  font-weight: 700;
+  color: var(--plum);
+  letter-spacing: 1px;
+  line-height: 1.05;
+}
+
+.hero-spa-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 8px;
+  color: var(--lavender);
+  margin: 8px 0 18px;
+}
+
+.hero-spa-label::before,
+.hero-spa-label::after {
+  content: "· ";
+}
+
+.hero-tagline {
+  max-width: 420px;
+  margin: 0 auto 28px;
+  font-size: 15px;
+  color: var(--plum-soft);
+  line-height: 1.6;
+}
+
+.hero-script {
+  font-family: var(--font-script);
+  font-size: clamp(44px, 11vw, 76px);
+  color: var(--lavender-deep);
+  margin: 4px 0 32px;
+  line-height: 1.1;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ============ FLORAL DIVIDER (signature motif reused) ============ */
+.floral-divider {
+  width: 120px;
+  height: 24px;
+  margin: 48px auto;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+/* ============ INTRO STRIP ============ */
+.intro-strip {
+  text-align: center;
+  padding: 8px 0 48px;
+}
+.intro-strip p {
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--plum-soft);
+  line-height: 1.6;
+}
+
+/* ============ SERVICES ============ */
+.services-section {
+  padding: 24px 0 56px;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.services-header .section-title {
+  font-size: clamp(24px, 5vw, 32px);
+  margin-top: 8px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  border: 1px solid var(--lilac-mid);
+  border-radius: 20px;
+  padding: 18px 20px;
+  position: relative;
+}
+
+.service-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lavender), var(--lavender-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+.service-icon svg { width: 26px; height: 26px; }
+
+.service-info { flex: 1; min-width: 0; }
+
+.service-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1.35;
+}
+
+.service-duration {
+  font-size: 12px;
+  color: var(--plum-soft);
+  margin-top: 2px;
+}
+
+.service-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.price-now {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--lavender-deep);
+  line-height: 1;
+}
+.price-now sub { font-size: 13px; font-weight: 500; }
+
+.price-was {
+  font-size: 12px;
+  color: var(--plum-soft);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.service-badge {
+  position: absolute;
+  bottom: -9px;
+  right: 20px;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* ============ TRUST BADGES ============ */
+.trust-section {
+  background: var(--lilac-soft);
+  padding: 44px 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 720px) {
+  .trust-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.trust-item {
+  text-align: center;
+}
+
+.trust-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  color: var(--lavender-deep);
+}
+
+.trust-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--plum-soft);
+  line-height: 1.4;
+}
+
+/* ============ CTA ============ */
+.cta-section {
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.cta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 600;
+  color: var(--plum);
+  margin-bottom: 10px;
+}
+
+.cta-subtext {
+  font-size: 14.5px;
+  color: var(--plum-soft);
+  margin-bottom: 28px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  padding: 32px 24px 40px;
+  border-top: 1px solid var(--lilac-mid);
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--plum);
+}
+
+.footer-sub {
+  font-size: 12px;
+  color: var(--plum-soft);
+  margin-top: 6px;
+}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ LOTUS DRAW-IN ANIMATION ============ */
+.lotus-path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw-lotus 1.8s ease forwards;
+}
+.lotus-path:nth-child(2) { animation-delay: 0.15s; }
+.lotus-path:nth-child(3) { animation-delay: 0.3s; }
+.lotus-path:nth-child(4) { animation-delay: 0.45s; }
+.lotus-path:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes draw-lotus {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .lotus-path { animation: none; stroke-dashoffset: 0; }
+}
