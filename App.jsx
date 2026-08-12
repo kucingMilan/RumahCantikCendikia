@@ -333,9 +333,65 @@ function Footer({ settings }) {
   );
 }
 
+// ============ SCROLL ASSIST: one smooth swap from Welcome -> Harga ============
+// While the visitor is still on the Welcome panel, the first deliberate scroll
+// (wheel, touch swipe, or keyboard) smoothly animates straight to the top of
+// the Harga panel. Once landed there, this hook steps out of the way entirely —
+// every scroll after that is 100% native, so the (long) price list can be
+// scrolled through slowly by hand, same for everything below it.
+function useWelcomeToHargaSwap() {
+  useEffect(() => {
+    const harga = document.getElementById("panel-harga");
+    if (!harga) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let armed = true; // becomes false right after the assisted swap fires
+
+    const hargaTop = () => harga.getBoundingClientRect().top + window.scrollY;
+    const stillOnWelcome = () => window.scrollY < hargaTop() - 20;
+
+    const swap = () => {
+      if (!armed || !stillOnWelcome()) return;
+      armed = false;
+      window.scrollTo({ top: hargaTop(), behavior: reducedMotion ? "auto" : "smooth" });
+    };
+
+    const onWheel = (e) => {
+      if (armed && stillOnWelcome() && e.deltaY > 0) { e.preventDefault(); swap(); }
+    };
+    const onKey = (e) => {
+      if (armed && stillOnWelcome() && ["ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); swap(); }
+    };
+    let touchStartY = null;
+    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
+    const onTouchMove = (e) => {
+      if (touchStartY == null || !armed || !stillOnWelcome()) return;
+      if (touchStartY - e.touches[0].clientY > 30) { e.preventDefault(); swap(); }
+    };
+    // Re-arm the assist if the visitor scrolls back up to the very top,
+    // so it's ready to swap again next time they scroll down.
+    const onScroll = () => { if (window.scrollY < 40) armed = true; };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+}
+
 // ============ MAIN APP ============
 export default function App() {
   const { settings, services, badges } = useSiteContent();
+  useWelcomeToHargaSwap();
 
   return (
     <div className="snap-container">
@@ -344,11 +400,11 @@ export default function App() {
         <IntroStrip settings={settings} />
       </div>
 
-      <div className="snap-panel snap-panel--top">
+      <div id="panel-harga" className="snap-panel snap-panel--top">
         <Services services={services} settings={settings} />
       </div>
 
-      <div className="snap-panel snap-panel--center">
+      <div className="panel-free panel-free--center">
         <TrustBadges badges={badges} />
         <CTASection settings={settings} />
         <Footer settings={settings} />
