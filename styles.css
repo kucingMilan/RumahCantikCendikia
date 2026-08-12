@@ -25,7 +25,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -53,31 +52,27 @@ button { font-family: inherit; }
   padding: 0 24px;
 }
 
-/* ============ SCROLL-SNAP PANELS ============ */
-.snap-container {
-  scroll-snap-type: y mandatory;
-}
-
-.snap-panel {
+/* ============ FULL-HEIGHT PANELS ============ */
+/* The Welcome -> Harga transition is handled by a one-time JS scroll-assist
+   (see App.jsx) rather than CSS scroll-snap, since scroll-snap-type with only
+   2 sparse snap points causes odd forced-pin behavior in some browsers.
+   After landing on Harga, scrolling is fully native/free — no snapping. */
+.snap-panel,
+.panel-free {
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
-.snap-panel--center {
+.snap-panel--center,
+.panel-free--center {
   justify-content: center;
 }
 
 .snap-panel--top {
   justify-content: flex-start;
   padding-top: 56px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html, .snap-container { scroll-snap-type: none; }
 }
 
 /* ============ TYPOGRAPHY ============ */
