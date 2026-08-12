@@ -256,9 +256,10 @@ function IntroStrip({ settings }) {
   );
 }
 
-function ServiceCard({ s }) {
+function ServiceCard({ s, settings }) {
+  const message = `Halo kak, saya mau tanya-tanya dan booking untuk *${s.name}${s.duration_minutes ? " (" + s.duration_minutes + "')" : ""}* — harga promo ${formatK(s.price)}. Boleh dibantu? 🌸`;
   return (
-    <div className="service-card">
+    <a className="service-card" href={waLink(settings.whatsapp_number, message)} target="_blank" rel="noopener noreferrer">
       <div className="service-icon"><Icon name={s.icon} /></div>
       <div className="service-info">
         <div className="service-name">{s.name}</div>
@@ -269,20 +270,21 @@ function ServiceCard({ s }) {
         {s.original_price && <div className="price-was">{formatK(s.original_price)}</div>}
       </div>
       {s.badge && <div className="service-badge">{s.badge}</div>}
-    </div>
+    </a>
   );
 }
 
-function Services({ services }) {
+function Services({ services, settings }) {
   return (
     <Reveal as="section" className="services-section">
       <div className="container">
         <div className="services-header">
           <div className="eyebrow">Menu Layanan</div>
           <div className="section-title">Harga Promo Hari Ini</div>
+          <div className="services-hint">Ketuk salah satu untuk tanya & booking via WhatsApp</div>
         </div>
         <div className="services-grid">
-          {services.map((s) => <ServiceCard key={s.id} s={s} />)}
+          {services.map((s) => <ServiceCard key={s.id} s={s} settings={settings} />)}
         </div>
       </div>
     </Reveal>
@@ -339,7 +341,7 @@ export default function App() {
     <div>
       <Hero settings={settings} />
       <IntroStrip settings={settings} />
-      <Services services={services} />
+      <Services services={services} settings={settings} />
       <TrustBadges badges={badges} />
       <CTASection settings={settings} />
       <Footer settings={settings} />
