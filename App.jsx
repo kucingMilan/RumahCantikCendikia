@@ -338,13 +338,21 @@ export default function App() {
   const { settings, services, badges } = useSiteContent();
 
   return (
-    <div>
-      <Hero settings={settings} />
-      <IntroStrip settings={settings} />
-      <Services services={services} settings={settings} />
-      <TrustBadges badges={badges} />
-      <CTASection settings={settings} />
-      <Footer settings={settings} />
+    <div className="snap-container">
+      <div className="snap-panel snap-panel--center">
+        <Hero settings={settings} />
+        <IntroStrip settings={settings} />
+      </div>
+
+      <div className="snap-panel snap-panel--top">
+        <Services services={services} settings={settings} />
+      </div>
+
+      <div className="snap-panel snap-panel--center">
+        <TrustBadges badges={badges} />
+        <CTASection settings={settings} />
+        <Footer settings={settings} />
+      </div>
     </div>
   );
 }
